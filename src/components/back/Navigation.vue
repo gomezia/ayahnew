@@ -33,6 +33,8 @@
 </template>
 
 <script>
+  import store from '../../store/store'
+
   export default {
     data () {
       return {
@@ -42,16 +44,20 @@
           { title: 'Admin content', icon: 'edit', to: {name: 'admin/content'} },
           { title: 'Add page', icon: 'note_add', to: {name: 'page/add'} },
           { title: 'Add article', icon: 'note_add', to: {name: 'article/add'} }
-          // { title: 'Settings', icon: 'settings', to: {name: 'page/add'} }
         ]
       }
     },
-    props: ['title', 'logo']
+    props: ['title'],
+    computed: {
+      logo () {
+        return store.getters.getLogo
+      }
+    }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
   .toolbar {
     box-shadow: none;
   }
