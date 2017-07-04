@@ -11,7 +11,7 @@
           <h1>Add article</h1>
         </div>
 
-          <v-card class="grey lighten-4 elevation-0">
+          <v-card class="white lighten-5 elevation-1">
             <v-card-text>
               <v-container fluid>
                 <v-layout row>
@@ -38,6 +38,18 @@
 
       </v-container>
 
+      <v-snackbar
+        :timeout="timeout"
+        :top="y === 'top'"
+        :right="x === 'right'"
+        v-model="snackbar"
+        :success="context === 'success'"
+        :error="context === 'error'"
+      >
+      {{ text }}
+      <v-btn flat class="pink--text" @click.native="snackbar = false">Close</v-btn>
+      </v-snackbar>
+
     </main>
   </v-app>
 </template>
@@ -56,7 +68,14 @@ export default {
         'value': '',
         'name': '',
         'size': ''
-      }
+      },
+      snackbar: false,
+      y: '',
+      x: 'right',
+      mode: '',
+      timeout: 6000,
+      text: 'Your article has been created successfully',
+      context: 'success'
     }
   },
 
@@ -80,7 +99,11 @@ export default {
       })
       .catch(error => {
         console.log(error)
+        this.context = 'error'
+        this.snackbar = 'true'
+        this.text = 'Error!'
       })
+      .then(this.snackbar = 'true')
     },
 
     handleFileUpload (file) {

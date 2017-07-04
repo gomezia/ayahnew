@@ -8,7 +8,13 @@
           <h1>Admin content</h1>
         </div>
 
-        <p>text</p>
+        <v-card class="white lighten-5 elevation-1">
+          <v-card-text>
+            <p>text</p>
+          </v-card-text>
+        </v-card>
+
+
       </v-container>
     </main>
     <v-footer class="indigo admin-container">
