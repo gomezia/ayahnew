@@ -19,7 +19,7 @@
 
 <script>
 import resource from '../config/axios'
-import Navigation from './back/Navigation'
+import Navigation from './back/layout/Navigation'
 
 export default {
   name: 'Article',
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     getNode () {
-      resource.get('/node/c5cc8af040bdffb4288de6a3fc000e85')
+      resource.get('/node/c8ff6a1916bd4c544d1a23896c0073ed')
         .then(response => {
           this.node = response.data
         })

@@ -27,34 +27,41 @@
                       id="article-input-body"
                       v-model="body"
                     ></v-text-field>
-                    <v-btn primary light @click.native="saveArticle()">Save</v-btn>
-
+                    <photo-upload  :value="img" @input="handleFileUpload"></photo-upload>
                   </v-flex>
                 </v-layout>
-
               </v-container>
             </v-card-text>
           </v-card>
+
+          <v-btn primary light @click.native="saveArticle()">Save</v-btn>
+
       </v-container>
-      
+
     </main>
   </v-app>
 </template>
 
 <script>
-import Navigation from './Navigation'
+import Navigation from './layout/Navigation'
 import resource from '../../config/axios'
+import PhotoUpload from './editor/PhotoUpload.vue'
 
 export default {
   data () {
     return {
       title: '',
-      body: ''
+      body: '',
+      img: {
+        'value': '',
+        'name': '',
+        'size': ''
+      }
     }
   },
 
   components: {
-    Navigation
+    Navigation, PhotoUpload
   },
 
   methods: {
@@ -74,6 +81,14 @@ export default {
       .catch(error => {
         console.log(error)
       })
+    },
+
+    handleFileUpload (file) {
+      this.img = {
+        'name': file.name,
+        'value': file.data,
+        'size': file.size
+      }
     }
   }
 }

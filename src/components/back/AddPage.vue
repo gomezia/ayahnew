@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import Navigation from './Navigation'
+import Navigation from './layout/Navigation'
 
 export default {
   data () {
