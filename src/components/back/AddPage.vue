@@ -37,6 +37,18 @@
 
       </v-container>
 
+      <v-snackbar
+        :timeout="timeout"
+        :top="y === 'top'"
+        :right="x === 'right'"
+        v-model="snackbar"
+        :success="context === 'success'"
+        :error="context === 'error'"
+      >
+      {{ text }}
+      <v-btn flat class="white--text" @click.native="snackbar = false">Close</v-btn>
+      </v-snackbar>
+
     </main>
   </v-app>
 </template>
@@ -49,7 +61,14 @@ export default {
   data () {
     return {
       title: '',
-      body: ''
+      body: '',
+      snackbar: false,
+      y: '',
+      x: 'right',
+      mode: '',
+      timeout: 60000,
+      text: 'Your Page has been created successfully',
+      context: 'success'
     }
   },
 
@@ -72,7 +91,11 @@ export default {
       })
       .catch(error => {
         console.log(error)
+        this.context = 'error'
+        this.snackbar = 'true'
+        this.text = 'Error!'
       })
+      .then(this.snackbar = 'true')
     }
   }
 }

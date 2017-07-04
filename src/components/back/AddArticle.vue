@@ -47,7 +47,7 @@
         :error="context === 'error'"
       >
       {{ text }}
-      <v-btn flat class="pink--text" @click.native="snackbar = false">Close</v-btn>
+      <v-btn flat class="white--text" @click.native="snackbar = false">Close</v-btn>
       </v-snackbar>
 
     </main>
