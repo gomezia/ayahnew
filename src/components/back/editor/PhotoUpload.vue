@@ -9,7 +9,7 @@
                @dragleave="hovering = false" :disabled="disabled"/>
       </div>
     </div>
-    <div class="edit-infos" v-show="mouseActive && value.data">
+    <div class="edit-infos" v-show="mouseActive && (value.data || preview)">
       <p>
         <strong class="text-warning">{{imageName}}</strong><br>
         <span><i class="material-icons">photo</i></span><br>
@@ -23,6 +23,63 @@
 
   </div>
 </template>
+
+<script>
+export default {
+  props: ['value', 'disabled'],
+  methods: {
+    handleImage (event) {
+      if (this.disabled) {
+        return
+      }
+      let files = event.target.files
+      if (files.length === 0) {
+        return
+      }
+      let reader = new FileReader()
+      reader.onload = (event) => {
+        this.preview = event.target.result
+        files[0]['data'] = this.preview
+        this.$emit('input', files[0])
+      }
+
+      reader.readAsDataURL(files[0])
+    },
+    removeFile (event) {
+      this.preview = ''
+      this.$emit('input', this.preview)
+    },
+    mouseOver () {
+      this.mouseActive = !this.mouseActive
+    }
+  },
+  data () {
+    return {
+      hovering: false,
+      preview: null,
+      mouseActive: false
+    }
+  },
+  computed: {
+    backgroundImage () {
+      let image = this.preview || this.value.data
+      if (!image) {
+        return null
+      }
+      return `url('${image}')`
+    },
+
+    imageName () {
+      let name = this.value.name
+      if (!name) {
+        return null
+      }
+      return name
+    }
+  }
+}
+</script>
+
 
 <style>
   .uploader {
@@ -85,7 +142,7 @@
     top: 0;
     height: 150px;
     width: 100%;
-    background-color: rgba(0,0,0,0.67);
+    background-color: rgba(54, 73, 93, 0.67);
     color: white;
     text-align: center;
   }
@@ -131,60 +188,3 @@
     }
   }
 </style>
-
-
-<script>
-export default {
-  props: ['value', 'disabled'],
-  methods: {
-    handleImage (event) {
-      if (this.disabled) {
-        return
-      }
-      let files = event.target.files
-      if (files.length === 0) {
-        return
-      }
-      let reader = new FileReader()
-      reader.onload = (event) => {
-        this.preview = event.target.result
-        files[0]['data'] = this.preview
-        this.$emit('input', files[0])
-      }
-
-      reader.readAsDataURL(files[0])
-    },
-    removeFile (event) {
-      this.preview = ''
-      this.$emit('input', this.preview)
-    },
-    mouseOver () {
-      this.mouseActive = !this.mouseActive
-    }
-  },
-  data () {
-    return {
-      hovering: false,
-      preview: null,
-      mouseActive: false
-    }
-  },
-  computed: {
-    backgroundImage () {
-      let image = this.preview || this.value.data
-      if (!image) {
-        return null
-      }
-      return `url('${image}')`
-    },
-
-    imageName () {
-      let name = this.value.name
-      if (!name) {
-        return null
-      }
-      return name
-    }
-  }
-}
-</script>
