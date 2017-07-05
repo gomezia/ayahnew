@@ -156,6 +156,12 @@ export default {
     text-align: right;
   }
 
+  @media (min-width: 1024px) {
+    .photo-upload {
+      width: 50%;
+    }
+  }
+
   @-webkit-keyframes progress{
     0% {
       background-position: 0 0;

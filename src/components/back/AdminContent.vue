@@ -28,30 +28,12 @@
                       </td> 
                       <td>07/04/2017</td> 
                       <td class="td-actions text-right">
-                        <v-btn success light flat @click.native="savePage()"><i class="material-icons">edit</i></v-btn> 
-                        <v-btn error light flat @click.native="savePage()"><i class="material-icons">delete</i></v-btn>
-                      </td>
-                    </tr>
-
-                                        <tr>
-                      <td>
-                        <a href="/node/3db29493d8129f8f0f56fd5fda0011bf" class="item">test</a>
-                      </td> 
-                      <td>07/04/2017</td> 
-                      <td class="td-actions text-right">
-                        <v-btn success light flat @click.native="savePage()"><i class="material-icons">edit</i></v-btn> 
-                        <v-btn error light flat @click.native="savePage()"><i class="material-icons">delete</i></v-btn>
-                      </td>
-                    </tr>
-
-                                        <tr>
-                      <td>
-                        <a href="/node/3db29493d8129f8f0f56fd5fda0011bf" class="item">test</a>
-                      </td> 
-                      <td>07/04/2017</td> 
-                      <td class="td-actions text-right">
-                        <v-btn success light flat @click.native="savePage()"><i class="material-icons">edit</i></v-btn> 
-                        <v-btn error light flat @click.native="savePage()"><i class="material-icons">delete</i></v-btn>
+                        <v-btn icon small class="green--text" @click.native="savePage()">
+                          <v-icon>edit</v-icon>
+                        </v-btn>
+                        <v-btn icon small class="red--text" @click.native="savePage()">
+                          <v-icon>delete</v-icon>
+                        </v-btn>
                       </td>
                     </tr>
                   </tbody>
