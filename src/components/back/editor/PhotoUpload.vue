@@ -95,6 +95,7 @@ export default {
 
   .photo-upload {
     position: relative;
+    margin-top: 30px;
   }
 
   .uplaod-container {

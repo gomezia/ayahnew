@@ -21,12 +21,11 @@
                       id="page-input-title"
                       v-model="title"
                     ></v-text-field>
-                    <v-text-field
-                      label="Body"
-                      multi-line
-                      id="page-input-body"
-                      v-model="body"
-                    ></v-text-field>
+                   
+                    <quill-editor v-model="body"
+                      ref="myQuillEditor">
+                    </quill-editor>
+
                   </v-flex>
                 </v-layout>
               </v-container>

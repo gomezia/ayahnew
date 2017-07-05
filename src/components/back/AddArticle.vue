@@ -21,12 +21,10 @@
                       id="article-input-title"
                       v-model="title"
                     ></v-text-field>
-                    <v-text-field
-                      label="Body"
-                      multi-line
-                      id="article-input-body"
-                      v-model="body"
-                    ></v-text-field>
+                        <quill-editor v-model="body"
+                          ref="myQuillEditor">
+                        </quill-editor>
+                        
                     <photo-upload  :value="img" @input="handleFileUpload"></photo-upload>
                   </v-flex>
                 </v-layout>

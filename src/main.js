@@ -3,8 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import router from './routes'
-// import VueMaterial from 'vue-material'
 import Vuetify from 'vuetify'
+import VueQuillEditor from 'vue-quill-editor'
 import VueProgressBar from 'vue-progressbar'
 
 Vue.use(VueProgressBar, {
@@ -12,6 +12,7 @@ Vue.use(VueProgressBar, {
   failedColor: 'red',
   height: '2px'
 })
+
 Vue.config.productionTip = false
 
 import 'bootstrap-grid-only/bootstrap.css'
@@ -19,8 +20,8 @@ import 'bootstrap-grid-only/bootstrap.css'
 import 'vuetify/dist/vuetify.min.css'
 import './assets/css/style.css'
 
-// Vue.use(VueMaterial)
 Vue.use(Vuetify)
+Vue.use(VueQuillEditor)
 
 /* eslint-disable no-new */
 new Vue({
