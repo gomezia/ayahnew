@@ -28,3 +28,10 @@ body {
   font-weight:900;
   color: #36495D;
 }
+
+/*
+ Quill tooltip
+*/
+.ql-snow .ql-tooltip {
+  z-index: 1000;
+}

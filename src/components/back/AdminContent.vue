@@ -10,9 +10,59 @@
 
         <v-card class="white lighten-5 elevation-1">
           <v-card-text>
-            <p>text</p>
+            
+            <v-card class="white lighten-5 elevation-5">
+              <v-card-text>
+                <table class="table table-hover">
+                  <thead class="text-default">
+                    <tr>
+                      <th>Title</th> 
+                      <th>Created</th> 
+                      <th>Actions</th>
+                    </tr>
+                  </thead> 
+                  <tbody>
+                    <tr>
+                      <td>
+                        <a href="/node/3db29493d8129f8f0f56fd5fda0011bf" class="item">test</a>
+                      </td> 
+                      <td>07/04/2017</td> 
+                      <td class="td-actions text-right">
+                        <v-btn success light flat @click.native="savePage()"><i class="material-icons">edit</i></v-btn> 
+                        <v-btn error light flat @click.native="savePage()"><i class="material-icons">delete</i></v-btn>
+                      </td>
+                    </tr>
+
+                                        <tr>
+                      <td>
+                        <a href="/node/3db29493d8129f8f0f56fd5fda0011bf" class="item">test</a>
+                      </td> 
+                      <td>07/04/2017</td> 
+                      <td class="td-actions text-right">
+                        <v-btn success light flat @click.native="savePage()"><i class="material-icons">edit</i></v-btn> 
+                        <v-btn error light flat @click.native="savePage()"><i class="material-icons">delete</i></v-btn>
+                      </td>
+                    </tr>
+
+                                        <tr>
+                      <td>
+                        <a href="/node/3db29493d8129f8f0f56fd5fda0011bf" class="item">test</a>
+                      </td> 
+                      <td>07/04/2017</td> 
+                      <td class="td-actions text-right">
+                        <v-btn success light flat @click.native="savePage()"><i class="material-icons">edit</i></v-btn> 
+                        <v-btn error light flat @click.native="savePage()"><i class="material-icons">delete</i></v-btn>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </v-card-text>
+            </v-card>
+
           </v-card-text>
         </v-card>
+
+
 
 
       </v-container>
