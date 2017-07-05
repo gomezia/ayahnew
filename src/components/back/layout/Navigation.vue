@@ -1,11 +1,10 @@
 <template>
   <div>
-    <v-navigation-drawer persistent v-model="drawer"  light enable-resize-watcher>
+    <v-navigation-drawer persistent v-model="drawer" dark enable-resize-watcher>
       <div class="logo-ayah">
         <img :src="logo.image" alt="ayah" class="img-responsive">
         <p>{{logo.text}}</p>
       </div>
-
       <v-divider></v-divider>
 
       <ul class="ayah-nav">
@@ -16,6 +15,7 @@
               </router-link>
           </li>
       </ul>
+
     </v-navigation-drawer>
 
     <v-toolbar class="pink" fixed	light>
@@ -27,7 +27,6 @@
       </v-toolbar-title>
     </v-toolbar>
     <main>
-      <v-navigation-drawer temporary v-model="left"></v-navigation-drawer>
     </main>
   </div>
 </template>
@@ -58,6 +57,10 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .application .navigation-drawer {
+    z-index: 1000;
+  }
+
   .toolbar {
     box-shadow: none;
   }
@@ -147,32 +150,33 @@
 
   /* Dark theme */
 
-  .navigation-drawer--dark {
+  .application .theme--dark.navigation-drawer {
     background: #36495D;
+    z-index: 1000;
   }
 
-  .navigation-drawer--dark .logo-ayah p {
+  .application .theme--dark.navigation-drawer .logo-ayah p {
     color: #FFFFFF;
   }
 
-  .navigation-drawer--dark .ayah-nav > li a,
-  .navigation-drawer--dark .ayah-nav > li a i,
-  .navigation-drawer--dark .ayah-nav li > a:hover i {
+  .application .theme--dark.navigation-drawer .ayah-nav > li a,
+  .application .theme--dark.navigation-drawer .ayah-nav > li a i,
+  .application .theme--dark.navigation-drawer .ayah-nav li > a:hover i {
     color: #FFFFFF;
   }
 
-  .navigation-drawer--dark .ayah-nav li > a i {
+  .application .theme--dark.navigation-drawer .ayah-nav li > a i {
     color: #36495D;
   }
 
-  .navigation-drawer--dark .ayah-nav li > a.router-link-exact-active {
+  .application .theme--dark.navigation-drawer .ayah-nav li > a.router-link-exact-active {
     background: #E91E63;
   }
 
-  .navigation-drawer--dark .ayah-nav li > a.router-link-exact-active i {
+  .application .theme--dark.navigation-drawer .ayah-nav li > a.router-link-exact-active i {
     color: #FFFFFF;
   }
-  .navigation-drawer--dark .divider {
+  .application .theme--dark.navigation-drawer .divider {
     background: rgba(251, 246, 246, 0.3);
   }
 
