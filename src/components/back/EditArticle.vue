@@ -11,6 +11,8 @@
           <h1>Edit article</h1>
         </div>
 
+        <v-progress-linear v-bind:indeterminate="true" v-if="progress"></v-progress-linear>
+
           <v-card class="white lighten-5 elevation-1">
             <v-card-text>
               <v-container fluid>
@@ -21,10 +23,12 @@
                       id="article-input-title"
                       v-model="node.title"
                       required
-                    ></v-text-field>
-                        <quill-editor v-model="node.body"
-                          ref="myQuillEditor">
-                        </quill-editor>
+                    >
+                    </v-text-field>
+
+                    <quill-editor v-model="node.body"
+                      ref="myQuillEditor">
+                    </quill-editor>
 
                     <photo-upload  :value="img" @input="handleFileUpload"></photo-upload>
 
@@ -72,7 +76,8 @@ export default {
       timeout: 60000,
       text: 'Your content has been updated successfully',
       context: 'success',
-      img: {}
+      img: {},
+      progress: false
     }
   },
 
@@ -85,10 +90,12 @@ export default {
       let url = `/node/${this.$route.params.id}`
       resource.get(url)
         .then(response => {
+          this.progress = true
           if (undefined !== response.data) {
             this.node = response.data
             this.img = response.data.image
           }
+          this.progress = false
         })
         .catch(error => {
           console.log(error)

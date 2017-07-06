@@ -22,6 +22,7 @@
           </v-layout>
         </div>
 
+        <v-progress-linear v-bind:indeterminate="true" v-if="progress"></v-progress-linear>
 
          <v-data-table
            v-bind:headers="headers"
@@ -122,7 +123,8 @@
         nodeToDelete: '',
         snackbar: false,
         context: 'success',
-        text: ''
+        text: '',
+        progress: false
       }
     },
 
@@ -135,9 +137,11 @@
         resource.get('/node/_design/node/_view/all')
           .then(response => {
             console.log(response.data)
+            this.progress = true
             response.data.rows.forEach((item, index) => {
               this.items.push(item.value)
             })
+            this.progress = false
           })
           .catch(error => {
             console.log(error)
