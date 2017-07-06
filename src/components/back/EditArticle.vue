@@ -1,14 +1,14 @@
 <template>
   <v-app>
     <!-- Nav -->
-    <Navigation title="Add page"></Navigation>
+    <Navigation title="Edit article"></Navigation>
 
     <!-- Main content -->
     <main class="admin-container">
       <v-container fluid>
 
         <div class="subheader">
-          <h1>Add page</h1>
+          <h1>Edit article</h1>
         </div>
 
           <v-card class="white lighten-5 elevation-1">
@@ -18,14 +18,15 @@
                   <v-flex xs12>
                     <v-text-field
                       label="Title"
-                      id="page-input-title"
-                      v-model="title"
+                      id="article-input-title"
+                      v-model="node.title"
                       required
                     ></v-text-field>
+                        <quill-editor v-model="node.body"
+                          ref="myQuillEditor">
+                        </quill-editor>
 
-                    <quill-editor v-model="body"
-                      ref="myQuillEditor">
-                    </quill-editor>
+                    <photo-upload  :value="img" @input="handleFileUpload"></photo-upload>
 
                   </v-flex>
                 </v-layout>
@@ -33,7 +34,7 @@
             </v-card-text>
           </v-card>
 
-          <v-btn primary light @click.native="savePage()">Save</v-btn>
+          <v-btn primary light @click.native="updateContent()">Save</v-btn>
 
       </v-container>
 
@@ -56,10 +57,12 @@
 <script>
 import Navigation from './layout/Navigation'
 import resource from '../../config/axios'
+import PhotoUpload from './editor/PhotoUpload.vue'
 
 export default {
   data () {
     return {
+      node: '',
       title: '',
       body: '',
       snackbar: false,
@@ -67,25 +70,54 @@ export default {
       x: 'right',
       mode: '',
       timeout: 60000,
-      text: 'Your Page has been created successfully',
-      context: 'success'
+      text: 'Your content has been updated successfully',
+      context: 'success',
+      img: {}
     }
   },
 
   components: {
-    Navigation
+    Navigation, PhotoUpload
   },
 
   methods: {
-    savePage () {
+    getNode () {
+      let url = `/node/${this.$route.params.id}`
+      resource.get(url)
+        .then(response => {
+          if (undefined !== response.data) {
+            this.node = response.data
+            this.img = response.data.image
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+
+    handleFileUpload (file) {
+      this.img = {
+        'name': file.name,
+        'data': file.data,
+        'size': file.size
+      }
+    },
+
+    updateContent () {
       let article = {
-        'title': this.title,
-        'body': this.body,
-        'created': +new Date(),
-        'type': 'page'
+        '_id': this.node._id,
+        '_rev': this.node._rev,
+        'title': this.node.title,
+        'body': this.node.body,
+        'image': this.img,
+        'created': this.node.created,
+        'updated': +new Date(),
+        'type': 'article'
       }
 
-      resource.post('/node', article)
+      let url = `/node/${this.$route.params.id}`
+
+      resource.put(url, article)
       .then(response => {
         console.log(response.data)
       })
@@ -95,8 +127,15 @@ export default {
         this.snackbar = 'true'
         this.text = 'Error!'
       })
-      .then(this.snackbar = 'true')
+      .then(_ => {
+        this.snackbar = 'true'
+        // this.$router.push('/admin/content')
+      })
     }
+  },
+
+  mounted () {
+    this.getNode()
   }
 }
 </script>

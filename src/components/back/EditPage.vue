@@ -1,14 +1,14 @@
 <template>
   <v-app>
     <!-- Nav -->
-    <Navigation title="Add page"></Navigation>
+    <Navigation title="Edit page"></Navigation>
 
     <!-- Main content -->
     <main class="admin-container">
       <v-container fluid>
 
         <div class="subheader">
-          <h1>Add page</h1>
+          <h1>Edit page</h1>
         </div>
 
           <v-card class="white lighten-5 elevation-1">
@@ -19,11 +19,11 @@
                     <v-text-field
                       label="Title"
                       id="page-input-title"
-                      v-model="title"
+                      v-model="node.title"
                       required
                     ></v-text-field>
 
-                    <quill-editor v-model="body"
+                    <quill-editor v-model="node.body"
                       ref="myQuillEditor">
                     </quill-editor>
 
@@ -33,7 +33,7 @@
             </v-card-text>
           </v-card>
 
-          <v-btn primary light @click.native="savePage()">Save</v-btn>
+          <v-btn primary light @click.native="updatePage()">Save</v-btn>
 
       </v-container>
 
@@ -60,6 +60,7 @@ import resource from '../../config/axios'
 export default {
   data () {
     return {
+      node: '',
       title: '',
       body: '',
       snackbar: false,
@@ -77,15 +78,34 @@ export default {
   },
 
   methods: {
-    savePage () {
+    getNode () {
+      let url = `/node/${this.$route.params.id}`
+      resource.get(url)
+        .then(response => {
+          console.log(response.data)
+          if (undefined !== response.data) {
+            this.node = response.data
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+
+    updatePage () {
       let article = {
-        'title': this.title,
-        'body': this.body,
-        'created': +new Date(),
+        '_id': this.node._id,
+        '_rev': this.node._rev,
+        'title': this.node.title,
+        'body': this.node.body,
+        'created': this.node.created,
+        'updated': +new Date(),
         'type': 'page'
       }
 
-      resource.post('/node', article)
+      let url = `/node/${this.$route.params.id}`
+
+      resource.put(url, article)
       .then(response => {
         console.log(response.data)
       })
@@ -95,8 +115,15 @@ export default {
         this.snackbar = 'true'
         this.text = 'Error!'
       })
-      .then(this.snackbar = 'true')
+      .then(_ => {
+        this.snackbar = 'true'
+        // this.$router.push('/admin/content')
+      })
     }
+  },
+
+  mounted () {
+    this.getNode()
   }
 }
 </script>

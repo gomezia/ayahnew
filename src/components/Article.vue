@@ -1,13 +1,13 @@
 <template>
   <v-app>
-    <Navigation title="Add article" :logo="logo"></Navigation>
+    <Navigation title="Add article"></Navigation>
     <main class="admin-container">
       <v-container fluid>
 
-        <h1>{{node.title}}</h1>
-        <img :src="nodeImage">
-        <p>{{node.image.size}}</p>
-        <p v-html="node.body"></p>
+        <!-- <h1>{{node.title}}</h1> -->
+        <!-- <img :src="nodeImage"> -->
+        <!-- <p>{{node.image.size}}</p>
+        <p v-html="node.body"></p> -->
 
       </v-container>
     </main>
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     getNode () {
-      resource.get('/node/c8ff6a1916bd4c544d1a23896c0073ed')
+      resource.get('/node/_design/node/_view/all')
         .then(response => {
           this.node = response.data
         })
@@ -54,9 +54,9 @@ export default {
     this.getNode()
   },
   computed: {
-    nodeImage () {
-      return this.node.image.value || ''
-    }
+    // nodeImage () {
+    //   return this.node.image.value || ''
+    // }
 
   }
 }

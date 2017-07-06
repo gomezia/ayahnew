@@ -20,11 +20,12 @@
                       label="Title"
                       id="article-input-title"
                       v-model="title"
+                      required
                     ></v-text-field>
                         <quill-editor v-model="body"
                           ref="myQuillEditor">
                         </quill-editor>
-                        
+
                     <photo-upload  :value="img" @input="handleFileUpload"></photo-upload>
                   </v-flex>
                 </v-layout>
