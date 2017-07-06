@@ -1,11 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
+// Back
 import AdminContent from '@/components/back/AdminContent'
 import AddArticle from '@/components/back/AddArticle'
 import AddPage from '@/components/back/AddPage'
 import EditPage from '@/components/back/EditPage'
 import EditArticle from '@/components/back/EditArticle'
-import Article from '@/components/Article'
+import Article from '@/components/front/Article'
+
+// Front
+import Blog from '@/components/front/Blog'
 
 Vue.use(Router)
 
@@ -14,7 +19,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Article
+      component: Blog
     },
 
     {
@@ -45,6 +50,12 @@ export default new Router({
       path: '/article/:id/edit',
       name: 'article/edit',
       component: EditArticle
+    },
+
+    {
+      path: '/article/:id',
+      name: 'article',
+      component: Article
     }
   ],
   linkActiveClass: 'active',

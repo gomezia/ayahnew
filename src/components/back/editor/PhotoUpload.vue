@@ -18,7 +18,7 @@
     </div>
 
     <div class="remove-btn-container">
-      <v-btn primary light flat  name="remove" @click.native="removeFile" v-if="preview">Remove image</v-btn>
+      <v-btn primary light flat  name="remove" @click.native="removeFile" v-if="preview || value.data">Remove image</v-btn>
     </div>
 
   </div>

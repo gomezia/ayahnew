@@ -38,7 +38,11 @@
              </span>
            </template>
            <template slot="items" scope="props">
-             <td>{{ props.item.title }}</td>
+             <td>
+               <router-link :to="{name: props.item.type, params: {id: props.item.id}}" class="item edit-icon">
+               {{ props.item.title }}
+               </router-link>
+             </td>
              <td  class="text-xs-right">{{ props.item.date }}</td>
              <td  class="text-xs-right">{{ props.item.type }}</td>
              <!--Actions  -->
