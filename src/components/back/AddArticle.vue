@@ -22,8 +22,12 @@
                       v-model="title"
                       required
                     ></v-text-field>
-                        <quill-editor v-model="body"
-                          ref="myQuillEditor">
+
+                        <quill-editor
+                          v-model="body"
+                          ref="myQuillEditor"
+                          :options="editorOption"
+                        >
                         </quill-editor>
 
                     <photo-upload  :value="img" @input="handleFileUpload"></photo-upload>
@@ -74,7 +78,16 @@ export default {
       mode: '',
       timeout: 6000,
       text: 'Your article has been created successfully',
-      context: 'success'
+      context: 'success',
+      editorOption: {
+        modules: {
+          toolbar: {
+            container: [
+              'bold', 'italic', 'underline', 'strike', {'list': 'ordered'}, {'list': 'bullet'}, { 'font': [] }, { 'align': [] }, 'blockquote', 'code-block'
+            ]
+          }
+        }
+      }
     }
   },
 

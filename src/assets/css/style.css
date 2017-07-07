@@ -35,3 +35,6 @@ body {
 .ql-snow .ql-tooltip {
   z-index: 1000;
 }
+.ql-container {
+  min-height: 150px;
+}
