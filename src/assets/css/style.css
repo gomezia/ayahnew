@@ -16,7 +16,12 @@ body {
 }
 
 .admin-container {
-  background: #FAFAFA;;
+  background: #FAFAFA;
+}
+
+.admin-container h2{
+  font-size: 1.3em;
+  font-weight:900;
 }
 
 .subheader {
@@ -37,4 +42,10 @@ body {
 }
 .ql-container {
   min-height: 150px;
+}
+
+
+/*++++++++++ Front +++++++++++++*/
+.toolbar--absolute + main, .toolbar--fixed + main {
+    /*padding-top: 48px;*/
 }

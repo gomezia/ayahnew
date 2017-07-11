@@ -42,7 +42,8 @@
         items: [
           { title: 'Admin content', icon: 'edit', to: {name: 'admin/content'} },
           { title: 'Add page', icon: 'note_add', to: {name: 'page/add'} },
-          { title: 'Add article', icon: 'note_add', to: {name: 'article/add'} }
+          { title: 'Add article', icon: 'note_add', to: {name: 'article/add'} },
+          { title: 'Settings', icon: 'settings', to: {name: 'admin/settings'} }
         ]
       }
     },

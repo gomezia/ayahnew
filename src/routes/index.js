@@ -7,6 +7,7 @@ import AddArticle from '@/components/back/AddArticle'
 import AddPage from '@/components/back/AddPage'
 import EditPage from '@/components/back/EditPage'
 import EditArticle from '@/components/back/EditArticle'
+import Settings from '@/components/back/Settings'
 import Article from '@/components/front/Article'
 
 // Front
@@ -26,6 +27,12 @@ export default new Router({
       path: '/admin/content',
       name: 'admin/content',
       component: AdminContent
+    },
+
+    {
+      path: '/admin/settings',
+      name: 'admin/settings',
+      component: Settings
     },
 
     {

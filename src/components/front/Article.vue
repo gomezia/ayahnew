@@ -1,30 +1,16 @@
 <template>
   <v-app class="front-container">
-      <v-toolbar class="white" light dense>
-        <v-toolbar-side-icon></v-toolbar-side-icon>
-        <v-toolbar-title>Startup inspiration</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn icon>
-          <v-icon>search</v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon>favorite</v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon>more_vert</v-icon>
-        </v-btn>
-      </v-toolbar>
+    <Toolbar></Toolbar>
     <main>
-      <div class="jumbotron">
+      <div class="jumbotron" :style="jumbotronBGColor">
         <v-container>
           <h1>{{node.title}}</h1>
         </v-container>
       </div>
       <v-container>
-        <img :src="node.image.data">
+        <img :src="node.image.value">
         <p>{{node.image.size}}</p>
         <p v-html="node.body"></p>
-
       </v-container>
     </main>
     <v-footer class="indigo">
@@ -34,7 +20,9 @@
 </template>
 
 <script>
+import store from '@/store/store'
 import resource from '../../config/axios'
+import Toolbar from '@/components/front/layout/Toolbar'
 
 export default {
   name: 'Article',
@@ -46,11 +34,11 @@ export default {
           value: '',
           size: ''
         }
-      },
-      loading: false
+      }
     }
   },
   components: {
+    Toolbar
   },
   methods: {
     getNode () {
@@ -67,10 +55,19 @@ export default {
 
   mounted () {
     this.getNode()
+    store.dispatch('LoadSettings')
   },
   computed: {
     nodeImage () {
       return this.node.image.value || ''
+    },
+
+    jumbotronBGColor () {
+      let style = {
+        background: store.getters.geSettings.front.jumbotronBGColor
+      }
+
+      return style
     }
 
   }
@@ -80,7 +77,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .jumbotron {
-    background-color: #F6B33D;
+    /*background-color: #F6B33D;
+    padding: 2em 0;*/
   }
   h1 {
     font-size: 3.5em;
