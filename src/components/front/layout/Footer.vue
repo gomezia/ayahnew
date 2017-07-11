@@ -1,14 +1,7 @@
 <template>
-  <v-toolbar class="white" light fixed>
-    <v-toolbar-side-icon></v-toolbar-side-icon>
-    <v-toolbar-title><span :style="siteNameColor">{{siteName}}</span></v-toolbar-title>
-    <v-spacer></v-spacer>
-    <router-link :to="{name: 'admin/content'}">
-      <v-btn icon>
-        <v-icon>dashboard</v-icon>
-      </v-btn>
-    </router-link>
-  </v-toolbar>
+  <v-footer :style="footerStyle">
+    <span>© 2017</span>
+  </v-footer>
 </template>
 
 <script>
@@ -22,9 +15,9 @@
 
     computed: {
       siteName: (_) => store.getters.getSettings.front.siteName,
-      siteNameColor: (_) => {
+      footerStyle: (_) => {
         let style = {
-          color: store.getters.getSettings.front.jumbotronBGColor
+          backgroundColor: store.getters.getSettings.front.jumbotronBGColor
         }
         return style
       }

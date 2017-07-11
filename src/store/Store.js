@@ -20,7 +20,7 @@ const myState = {
 
 const myGetters = {
   getLogo: state => state.logo,
-  geSettings: state => state.settings
+  getSettings: state => state.settings
 }
 
 const myMutations = {

@@ -6,10 +6,16 @@
         <div class="subheader">
           <h1>Settings</h1>
         </div>
-        <v-card class="white lighten-5 elevation-1">
-          <v-card-text>
-            <h2>Site</h2>
-            <v-card class="white lighten-5 elevation-1">
+
+        <v-tabs dark fixed centered>
+          <v-tabs-bar slot="activators" class="dark">
+            <v-tabs-slider class="white"></v-tabs-slider>
+            <v-tabs-item key="1" href="#tab-1" >Site</v-tabs-item>
+            <v-tabs-item key="1" href="#tab-2" >Theme</v-tabs-item>
+          </v-tabs-bar>
+
+          <v-tabs-content key="1" id="tab-1">
+            <v-card flat>
               <v-card-text>
                 <v-layout row>
                   <v-flex xs6>
@@ -21,20 +27,19 @@
                 </v-layout>
               </v-card-text>
             </v-card>
+          </v-tabs-content>
 
-            <h2>Theme</h2>
-            <v-card class="white lighten-5 elevation-1">
+          <v-tabs-content key="2" id="tab-2">
+            <v-card flat>
               <v-card-text>
                 <h2>Jumbotron background-Color</h2>
                 <div :style="'background-color:' + jumbotronBGColor.hex">
-                <Swatches v-model="jumbotronBGColor" />
+                  <Chrome v-model="jumbotronBGColor" />
                 </div>
-
               </v-card-text>
             </v-card>
-
-          </v-card-text>
-        </v-card>
+          </v-tabs-content>
+        </v-tabs>
 
         <v-btn primary light @click.native="saveSettings()">Save</v-btn>
 
@@ -47,7 +52,7 @@
 import store from '@/store/store'
 import Navigation from './layout/Navigation'
 import resource from '../../config/axios'
-import { Swatches } from 'vue-color'
+import { Chrome } from 'vue-color'
 
 export default {
   data () {
@@ -60,7 +65,7 @@ export default {
   },
 
   components: {
-    Navigation, Swatches
+    Navigation, Chrome
   },
 
   methods: {
@@ -87,11 +92,15 @@ export default {
   },
 
   mounted () {
-    this.siteName = store.getters.geSettings.front.siteName
+    this.jumbotronBGColor.hex = store.getters.getSettings.front.jumbotronBGColor
+    this.siteName = store.getters.getSettings.front.siteName
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .tabs__bar {
+      background-color: #496684;
+  }
 </style>

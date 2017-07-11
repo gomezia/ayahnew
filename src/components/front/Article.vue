@@ -8,14 +8,15 @@
         </v-container>
       </div>
       <v-container>
-        <img :src="node.image.value">
-        <p>{{node.image.size}}</p>
+        <img :src="node.image.value" title="">
+        <v-divider></v-divider>
+        <p> 
+          <span class="text-time">{{node.created | moment("dddd, MMMM Do YYYY") }}</span>
+        </p>
         <p v-html="node.body"></p>
       </v-container>
     </main>
-    <v-footer class="indigo">
-      <span>© 2017</span>
-    </v-footer>
+    <Footer></Footer>
   </v-app>
 </template>
 
@@ -23,6 +24,7 @@
 import store from '@/store/store'
 import resource from '../../config/axios'
 import Toolbar from '@/components/front/layout/Toolbar'
+import Footer from '@/components/front/layout/Footer'
 
 export default {
   name: 'Article',
@@ -38,7 +40,7 @@ export default {
     }
   },
   components: {
-    Toolbar
+    Toolbar, Footer
   },
   methods: {
     getNode () {
@@ -64,7 +66,7 @@ export default {
 
     jumbotronBGColor () {
       let style = {
-        background: store.getters.geSettings.front.jumbotronBGColor
+        background: store.getters.getSettings.front.jumbotronBGColor
       }
 
       return style

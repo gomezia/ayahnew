@@ -17,12 +17,14 @@
     "axios": "^0.16.2",
     "bootstrap-grid-only": "^1.0.0",
     "vue": "^2.3.3",
+    "vue-color": "^2.2.0",
     "vue-progressbar": "^0.7.2",
     "vue-quill-editor": "^2.2.2",
     "vue-resource": "^1.3.4",
     "vue-router": "^2.3.1",
     "vuex": "^2.0.0",
-    "vuex-router-sync": "next"
+    "vuex-router-sync": "next",
+    "vue-moment": "^2.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
