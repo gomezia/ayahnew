@@ -33,24 +33,33 @@
             <v-card flat>
               <v-card-text>
 
-                <div class="col-xs-12 col-sm-4">
-                  <h2>Jumbotron background-Color</h2>
-                  <div>
-                    <Chrome v-model="jumbotronBGColor" />
+                <div class="row">
+                  <div class="col-xs-12 col-sm-4">
+                    <h2>Jumbotron background-Color</h2>
+                    <div>
+                      <Chrome v-model="jumbotronBGColor" />
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12 col-sm-4">
+                    <h2>Header text color</h2>
+                    <div>
+                      <Chrome v-model="headerTextColor" />
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12 col-sm-4">
+                    <h2>Header text background-color</h2>
+                    <div>
+                      <Chrome v-model="headerTextBGColor" />
+                    </div>
                   </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-4">
-                  <h2>Header text color</h2>
-                  <div>
-                    <Chrome v-model="headerTextColor" />
-                  </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-4">
-                  <h2>Header text background-color</h2>
-                  <div>
-                    <Chrome v-model="headerTextBGColor" />
+                <div class="row">
+                  <div class="col-xs-12 col-sm-4">
+                    <h2>Header image background</h2>
+                    <photo-upload  :value="img" @input="handleFileUpload"></photo-upload>
                   </div>
                 </div>
 
@@ -70,14 +79,14 @@
             <v-card-text>
               <v-toolbar class="white" light>
                 <v-toolbar-side-icon></v-toolbar-side-icon>
-                <v-toolbar-title><span :style="'color:' + jumbotronBGColor.hex">{{siteName}}</span></v-toolbar-title>
+                <v-toolbar-title>{{siteName}}</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-btn icon>
                   <v-icon>dashboard</v-icon>
                 </v-btn>
               </v-toolbar>
               <main>
-                <div class="jumbotron" :style="'background-color:' + jumbotronBGColor.hex">
+                <div class="fake-jumbotron" :style="headerStyle">
                   <v-container>
                     <div class="fake-h1" :style="headerTextStyle">header Lorem epsum {{headerTextColor.hex}}</div>
                   </v-container>
@@ -103,6 +112,7 @@ import store from '@/store/store'
 import Navigation from './layout/Navigation'
 import resource from '../../config/axios'
 import { Chrome } from 'vue-color'
+import PhotoUpload from './editor/PhotoUpload.vue'
 
 export default {
   data () {
@@ -117,15 +127,22 @@ export default {
         hex: '#194d33',
         rgba: ''
       },
+
       headerTextBGColor: {
         hex: '#194d33',
         rgba: ''
+      },
+
+      img: {
+        'value': '',
+        'name': '',
+        'size': ''
       }
     }
   },
 
   components: {
-    Navigation, Chrome
+    Navigation, Chrome, PhotoUpload
   },
 
   computed: {
@@ -137,6 +154,16 @@ export default {
       }
 
       return style
+    },
+
+    headerStyle () {
+      let style = {
+        backgroundColor: this.jumbotronBGColor.hex,
+        backgroundImage: `url('${this.img.value}')`,
+        backgroundRepeat: 'repeat'
+      }
+
+      return style
     }
   },
 
@@ -145,7 +172,9 @@ export default {
       let mySettings = {
         front: {
           siteName: this.siteName,
-          jumbotronBGColor: this.jumbotronBGColor.hex
+          header: this.headerStyle,
+          headerImage: this.img.value,
+          headerText: this.headerTextStyle
         }
       }
 
@@ -160,12 +189,24 @@ export default {
         this.text = 'Error!'
       })
       .then(this.snackbar = 'true')
+    },
+
+    handleFileUpload (file) {
+      this.img = {
+        'name': file.name,
+        'value': file.data,
+        'size': file.size
+      }
     }
   },
 
   mounted () {
-    this.jumbotronBGColor.hex = store.getters.getSettings.front.jumbotronBGColor
     this.siteName = store.getters.getSettings.front.siteName
+    // this.jumbotronBGColor.hex = store.getters.getSettings.front.header.backgroundColor
+    console.log(store.getters.getSettings.front.headerText)
+    this.headerStyle = store.getters.getSettings.front.header
+    this.headerTextStyle = store.getters.getSettings.front.headerText
+    this.img.value = store.getters.getSettings.front.headerImage
   }
 }
 </script>
@@ -174,7 +215,7 @@ export default {
 <style scoped>
   .fake-jumbotron {
     background-color: #FFFFFF;
-    padding: 1em;
+    padding: 3em 1em;
     margin-top: 3em;
     margin-right: 2em;
   }

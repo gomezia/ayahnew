@@ -2,9 +2,9 @@
   <v-app class="front-container">
     <Toolbar></Toolbar>
     <main>
-      <div class="jumbotron" :style="jumbotronBGColor">
+      <div class="jumbotron" :style="headerStyle">
         <v-container>
-          <h1>{{node.title}}</h1>
+          <h1 :style="headerTextStyle">{{node.title}}</h1>
         </v-container>
       </div>
       <v-container>
@@ -64,13 +64,8 @@ export default {
       return this.node.image.value || ''
     },
 
-    jumbotronBGColor () {
-      let style = {
-        background: store.getters.getSettings.front.jumbotronBGColor
-      }
-
-      return style
-    }
+    headerStyle: (_) => store.getters.getSettings.front.header,
+    headerTextStyle: (_) => store.getters.getSettings.front.headerText
 
   }
 }

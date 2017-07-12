@@ -13,7 +13,9 @@ const myState = {
   settings: {
     front: {
       siteName: 'Oran',
-      jumbotronBGColor: ''
+      header: '',
+      headerImage: '',
+      headerText: ''
     }
   }
 }
@@ -35,7 +37,6 @@ const myActions = {
     let url = '/settings/_all_docs?limit=1&descending=true&include_docs=true'
     resource.get(url)
       .then(response => {
-        console.log('Store data', response.data.rows[0].doc.front)
         store.commit('SETSETTINGS', response.data.rows[0].doc.front)
       })
       .catch(error => {
