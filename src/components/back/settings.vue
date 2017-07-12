@@ -7,9 +7,9 @@
           <h1>Settings</h1>
         </div>
 
-        <v-tabs dark fixed centered>
-          <v-tabs-bar slot="activators" class="dark">
-            <v-tabs-slider class="white"></v-tabs-slider>
+        <v-tabs fixed centered>
+          <v-tabs-bar slot="activators" class="white">
+            <v-tabs-slider class="black"></v-tabs-slider>
             <v-tabs-item key="1" href="#tab-1" >Site</v-tabs-item>
             <v-tabs-item key="1" href="#tab-2" >Theme</v-tabs-item>
           </v-tabs-bar>
@@ -32,16 +32,66 @@
           <v-tabs-content key="2" id="tab-2">
             <v-card flat>
               <v-card-text>
-                <h2>Jumbotron background-Color</h2>
-                <div :style="'background-color:' + jumbotronBGColor.hex">
-                  <Chrome v-model="jumbotronBGColor" />
+
+                <div class="col-xs-12 col-sm-4">
+                  <h2>Jumbotron background-Color</h2>
+                  <div>
+                    <Chrome v-model="jumbotronBGColor" />
+                  </div>
                 </div>
-              </v-card-text>
+
+                <div class="col-xs-12 col-sm-4">
+                  <h2>Header text color</h2>
+                  <div>
+                    <Chrome v-model="headerTextColor" />
+                  </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-4">
+                  <h2>Header text background-color</h2>
+                  <div>
+                    <Chrome v-model="headerTextBGColor" />
+                  </div>
+                </div>
+
+              </v-card-text>              
             </v-card>
           </v-tabs-content>
         </v-tabs>
 
         <v-btn primary light @click.native="saveSettings()">Save</v-btn>
+
+        <!-- Preview -->
+        <div class="theme-preview">
+          <div class="subheader">
+            <h2>Preview</h2>
+          </div>
+          <v-card>
+            <v-card-text>
+              <v-toolbar class="white" light>
+                <v-toolbar-side-icon></v-toolbar-side-icon>
+                <v-toolbar-title><span :style="'color:' + jumbotronBGColor.hex">{{siteName}}</span></v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-btn icon>
+                  <v-icon>dashboard</v-icon>
+                </v-btn>
+              </v-toolbar>
+              <main>
+                <div class="jumbotron" :style="'background-color:' + jumbotronBGColor.hex">
+                  <v-container>
+                    <div class="fake-h1" :style="headerTextStyle">header Lorem epsum {{headerTextColor.hex}}</div>
+                  </v-container>
+                </div>
+                <v-container>
+                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                </v-container>
+              </main>
+              <v-footer :style="'background-color:' + jumbotronBGColor.hex">
+                <span>© 2017</span>
+              </v-footer>
+            </v-card-text>
+          </v-card>
+        </div>
 
       </v-container>
     </main>
@@ -59,13 +109,35 @@ export default {
     return {
       siteName: '',
       jumbotronBGColor: {
-        hex: '#194d33'
+        hex: '#194d33',
+        rgba: ''
+      },
+
+      headerTextColor: {
+        hex: '#194d33',
+        rgba: ''
+      },
+      headerTextBGColor: {
+        hex: '#194d33',
+        rgba: ''
       }
     }
   },
 
   components: {
     Navigation, Chrome
+  },
+
+  computed: {
+    headerTextStyle () {
+      let color = this.headerTextBGColor.rgba
+      let style = {
+        color: this.headerTextColor.hex,
+        backgroundColor: `rgba(${color.r},${color.g},${color.b},${color.a})`
+      }
+
+      return style
+    }
   },
 
   methods: {
@@ -100,7 +172,21 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .tabs__bar {
-      background-color: #496684;
+  .fake-jumbotron {
+    background-color: #FFFFFF;
+    padding: 1em;
+    margin-top: 3em;
+    margin-right: 2em;
+  }
+
+  .theme-preview {
+    margin-top: 2em;
+  }
+
+  .theme-preview .fake-h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+    background-color: white;
+    padding: 0 8px;
   }
 </style>
