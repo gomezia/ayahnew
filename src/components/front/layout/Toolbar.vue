@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar class="white" light fixed>
+  <v-toolbar class="ayah-toolbar white elevation-0" light dense fixed>
     <v-toolbar-side-icon></v-toolbar-side-icon>
     <v-toolbar-title><span :style="siteNameColor">{{siteName}}</span></v-toolbar-title>
     <v-spacer></v-spacer>
@@ -37,5 +37,8 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
+  .ayah-toolbar .toolbar__content {
+    border-bottom: solid 1px #E0E0E0;
+  }
 </style>
