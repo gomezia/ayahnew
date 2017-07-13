@@ -9,6 +9,7 @@ import EditPage from '@/components/back/EditPage'
 import EditArticle from '@/components/back/EditArticle'
 import Settings from '@/components/back/Settings'
 import Article from '@/components/front/Article'
+import Page from '@/components/front/Page'
 
 // Front
 import Blog from '@/components/front/Blog'
@@ -63,6 +64,12 @@ export default new Router({
       path: '/article/:id',
       name: 'article',
       component: Article
+    },
+
+    {
+      path: '/page/:id',
+      name: 'page',
+      component: Page
     }
   ],
   linkActiveClass: 'active',
