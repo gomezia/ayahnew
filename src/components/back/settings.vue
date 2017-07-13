@@ -13,6 +13,7 @@
             <v-tabs-item key="1" href="#tab-1" >Site</v-tabs-item>
             <v-tabs-item key="1" href="#tab-2" >Theme</v-tabs-item>
           </v-tabs-bar>
+          <v-divider></v-divider>
 
           <v-tabs-content key="1" id="tab-1">
             <v-card flat>
@@ -63,7 +64,7 @@
                   </div>
                 </div>
 
-              </v-card-text>              
+              </v-card-text>
             </v-card>
           </v-tabs-content>
         </v-tabs>
@@ -174,7 +175,8 @@ export default {
           siteName: this.siteName,
           header: this.headerStyle,
           headerImage: this.img.value,
-          headerText: this.headerTextStyle
+          headerText: this.headerTextStyle,
+          headerTextBGColor: this.headerTextBGColor.rgba
         }
       }
 
@@ -201,12 +203,14 @@ export default {
   },
 
   mounted () {
-    this.siteName = store.getters.getSettings.front.siteName
-    // this.jumbotronBGColor.hex = store.getters.getSettings.front.header.backgroundColor
-    console.log(store.getters.getSettings.front.headerText)
-    this.headerStyle = store.getters.getSettings.front.header
-    this.headerTextStyle = store.getters.getSettings.front.headerText
-    this.img.value = store.getters.getSettings.front.headerImage
+    let getFront = store.getters.getSettings.front
+
+    this.siteName = getFront.siteName
+    this.headerStyle = getFront.header
+    this.headerTextStyle = getFront.headerText
+    this.img.value = getFront.headerImage
+    this.headerTextBGColor.rgba = getFront.headerTextBGColor
+    this.headerTextColor.hex = getFront.headerText.color
   }
 }
 </script>

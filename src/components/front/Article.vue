@@ -10,7 +10,7 @@
       <v-container>
         <img :src="node.image.value" title="">
         <v-divider></v-divider>
-        <p> 
+        <p>
           <span class="text-time">{{node.created | moment("dddd, MMMM Do YYYY") }}</span>
         </p>
         <p v-html="node.body"></p>
@@ -74,8 +74,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .jumbotron {
-    /*background-color: #F6B33D;
-    padding: 2em 0;*/
+    padding: 5em 0;
   }
   h1 {
     font-size: 3.5em;
