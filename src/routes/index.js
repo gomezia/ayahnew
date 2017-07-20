@@ -7,7 +7,7 @@ import AddArticle from '../components/back/AddArticle'
 import AddPage from '../components/back/AddPage'
 import EditPage from '../components/back/EditPage'
 import EditArticle from '../components/back/EditArticle'
-import Settings from '../components/back/Settings'
+import Settings from '../components/back/settings'
 import Article from '../components/front/Article'
 import Page from '../components/front/Page'
 

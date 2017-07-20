@@ -109,7 +109,7 @@
 </template>
 
 <script>
-import store from '@/store/store'
+import store from '../../store/store'
 import Navigation from './layout/Navigation'
 import resource from '../../config/axios'
 import { Chrome } from 'vue-color'

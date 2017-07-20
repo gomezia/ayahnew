@@ -21,10 +21,10 @@
 </template>
 
 <script>
-import store from '@/store/store'
+import store from '../../store/store'
 import resource from '../../config/axios'
-import Toolbar from '@/components/front/layout/Toolbar'
-import Footer from '@/components/front/layout/Footer'
+import Toolbar from './layout/Toolbar'
+import Footer from './layout/Footer'
 
 export default {
   name: 'Article',
